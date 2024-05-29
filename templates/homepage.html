@@ -1,0 +1,115 @@
+
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>U-Value Savings</title>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!-- <script src="/static/jquery.formset.js"></script> -->
+
+  </head>
+
+        <div>
+            <a href="/" class="nav-item nav-link">Home</a>
+        </div>
+          <div>
+            <h1><center> Enter a Postcode to download an Excel report. </center><h1>
+          <form class="signinform" id="signinform" action="/savingslistpost/" method="post" onsubmit="showLoader()">
+              {% csrf_token %}
+              {{ form }}
+              <input type="submit" value="Submit">
+          </form>
+
+          </div>
+
+  <style>
+    .signinform {
+      max-width: 300px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #f7f7f7;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      font-family: Arial, sans-serif;
+    }
+
+    .signinform label {
+      display: block;
+      margin-bottom: 10px;
+      font-weight: bold;
+    }
+
+  </style>
+
+<script>
+  function showLoaderOnClick(url) {
+      showLoader();
+      window.location=url;
+  }
+function showLoader(){
+      $('body').append('<div style="" id="loadingDiv"><div class="loader">Loading...please be patient as it takes time for the file to be processed. The download will start shortly!!</div></div>');
+  }
+
+
+        function samplesSubmit(url, form) {
+        event.preventDefault();
+
+        console.log("YESSS");
+
+
+
+        var postcode = document.forms[form].elements['postcode'].value;
+
+        var formData={"postcode":postcode};
+
+        $.ajax({
+                    url: "http://localhost:8000/savingslistpost/",
+                    type:"POST",
+                    data:JSON.stringify(formData),
+                    headers: {'Content-Type':'application/json',  'X-CSRFToken': getCookie("csrftoken")},
+
+                    success:function(response){
+                      const a = document.createElement('a');
+                      a.download = 'sample.xlsx';
+
+
+                    },
+                    fail:function(response){
+                      console.log(response);
+                    }
+                });
+
+        }
+        // Function to get cookie by name; retrieved from https://docs.djangoproject.com/en/3.1/ref/csrf/
+  function getCookie(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                // Does this cookie string begin with the name we want?
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+      }
+
+
+</script>
+
+
+
+{% endblock %}
