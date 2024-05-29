@@ -54,7 +54,7 @@ ROOT_URLCONF = "savings_by_PostCode.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": ['templates'],
+        "DIRS": ['uvalue_savings/templates'],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
