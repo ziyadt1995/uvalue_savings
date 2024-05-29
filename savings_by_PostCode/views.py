@@ -1,8 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
-from datetime import date
-from dateutil.relativedelta import relativedelta
 from django.views.decorators.csrf import csrf_exempt
 from openpyxl.writer.excel import save_virtual_workbook
 from rest_framework.views import APIView
@@ -26,7 +24,6 @@ import json
 
 
 import requests
-import matplotlib.pyplot as plt
 import numpy as np
 from openpyxl import Workbook, load_workbook
 from openpyxl.utils import get_column_letter
@@ -36,7 +33,6 @@ import math
 
 
 import requests
-import matplotlib.pyplot as plt
 import numpy as np
 from openpyxl import Workbook, load_workbook
 from openpyxl.utils import get_column_letter
