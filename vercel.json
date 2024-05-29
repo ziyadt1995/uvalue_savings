@@ -1,13 +1,13 @@
 {
     "builds": [{
-        "src": "uvalue_savings/savings_by_PostCode/wsgi.py",
+        "src": "savings_by_PostCode/wsgi.py",
         "use": "@vercel/python",
         "config": { "maxLambdaSize": "15mb", "runtime": "python3.9" }
     }],
     "routes": [
         {
             "src": "/(.*)",
-            "dest": "uvalue_savings/savings_by_PostCode/wsgi.py"
+            "dest": "savings_by_PostCode/wsgi.py"
         }
     ]
 }
